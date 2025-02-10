@@ -1,49 +1,47 @@
-<!-- HTML 부분 (예시로 라디오 버튼이 포함된 HTML) -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radio Button Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>라디오 버튼 예시</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .radio-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-label {
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+  </style>
 </head>
 <body>
-    <h3>년-월 선택</h3>
-    <label>
-        <input type="radio" name="yearMonth" value="2024-01"> 2024-01
+  <div class="radio-container">
+    <label class="radio-label">
+      <input type="radio" name="option" value="직영"> 직영
     </label>
-    <label>
-        <input type="radio" name="yearMonth" value="2024-02"> 2024-02
+    <label class="radio-label">
+      <input type="radio" name="option" value="위탁"> 위탁
     </label>
-    <label>
-        <input type="radio" name="yearMonth" value="2024-03"> 2024-03
-    </label>
-
-    <script>
-        // 라디오 버튼 클릭 시 동적 처리
-        document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
-            radio.addEventListener('change', function(event) {
-                // 선택된 라디오 버튼 값 가져오기
-                var selectedValue = event.target.value;
-                alert('선택된 값: ' + selectedValue);
-
-                // Google Apps Script 웹 앱에 GET 요청 보내기
-                var scriptUrl = 'https://script.google.com/macros/s/AKfycby7iCdItmkKyehwuOr984-LoYrqVd5rcathsksQyDe8Ht7noi8tyHvpbni2zYJQS8J1/exec';  // 여기에 배포된 웹 앱 URL 입력
-
-                // GET 요청 보내기 (선택된 값 전달)
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', scriptUrl + '?selectedValue=' + encodeURIComponent(selectedValue), true);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        // 응답 처리
-                        alert('응답: ' + xhr.responseText);
-                    } else {
-                        // 오류 처리
-                        alert('오류 발생');
-                    }
-                };
-                xhr.send();
-            });
-        });
-    </script>
+  </div>
 </body>
 </html>
