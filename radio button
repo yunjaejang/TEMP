@@ -1,0 +1,56 @@
+const container = document.createElement('div');
+container.innerHTML = `
+  <style>
+    .radio-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .radio-label {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .radio-input {
+      display: none;
+    }
+    .radio-custom {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #007bff;
+      display: inline-block;
+      position: relative;
+    }
+    .radio-input:checked + .radio-custom {
+      background-color: #007bff;
+    }
+  </style>
+
+  <div class="radio-group">
+    <label class="radio-label">
+      <input type="radio" name="filter" value="option1" class="radio-input" />
+      <span class="radio-custom"></span> Option 1
+    </label>
+    <label class="radio-label">
+      <input type="radio" name="filter" value="option2" class="radio-input" />
+      <span class="radio-custom"></span> Option 2
+    </label>
+    <label class="radio-label">
+      <input type="radio" name="filter" value="option3" class="radio-input" />
+      <span class="radio-custom"></span> Option 3
+    </label>
+  </div>
+`;
+
+container.querySelectorAll('input[name="filter"]').forEach((radio) => {
+  radio.addEventListener('change', (event) => {
+    const selectedValue = event.target.value;
+    console.log("선택된 값:", selectedValue);
+
+    // Looker Studio 매개변수 업데이트 (예제)
+    // google.visualization.events.trigger('filterChange', { key: 'filter_a', value: selectedValue });
+  });
+});
+
+document.body.appendChild(container);
