@@ -1,89 +1,27 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>라디오 버튼 동적 처리</title>
-    <style>
-        /* 기본적인 스타일 */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
+<script>
+    // 라디오 버튼 클릭 시 동적 처리
+    document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+        radio.addEventListener('change', function(event) {
+            // 선택된 라디오 버튼 값 가져오기
+            var selectedValue = event.target.value;
+            alert('선택된 값: ' + selectedValue);
 
-        /* 라디오 버튼 숨기기 */
-        input[type="radio"] {
-            display: none;
-        }
+            // Google Apps Script 웹 앱에 GET 요청 보내기
+            var scriptUrl = 'https://script.google.com/macros/s/AKfycbzCq9MqWUI37xfnChsAQ1M9t0iaBpsB6ETc7McmRoZudGzKL9cnLemt5TcX43yTy1HjRw/exec';  // 여기에 배포된 웹 앱 URL 입력
 
-        /* 라벨 스타일 */
-        .custom-radio {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-size: 18px;
-            margin-right: 20px; /* 가로로 배치하기 위해 오른쪽 마진 추가 */
-        }
-
-        .custom-radio .circle {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #007bff;
-            border-radius: 50%;
-            margin-right: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        /* 라디오 버튼이 선택되면 배경색 변화 */
-        input[type="radio"]:checked + .custom-radio .circle {
-            background-color: #007bff;
-        }
-
-        .custom-radio .circle::after {
-            content: "";
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            border-radius: 50%;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-
-        /* 선택된 라디오 버튼 안에 점 표시 */
-        input[type="radio"]:checked + .custom-radio .circle::after {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
-
-    <h2>커스텀 라디오 버튼</h2>
-
-    <div style="display: flex; justify-content: flex-start;"> <!-- 가로로 배치하는 부모 컨테이너 -->
-        <input type="radio" id="radio1" name="custom-radio-group" value="직영">
-        <label for="radio1" class="custom-radio">
-            <div class="circle"></div> 직영
-        </label>
-
-        <input type="radio" id="radio2" name="custom-radio-group" value="위탁">
-        <label for="radio2" class="custom-radio">
-            <div class="circle"></div> 위탁
-        </label>
-    </div>
-
-    <script>
-        // 라디오 버튼 클릭 시 동적 처리
-        document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
-            radio.addEventListener('change', function(event) {
-                // 라디오 버튼 값에 따라 동적 처리
-                alert('선택된 값: ' + event.target.value);
-                // 여기에 Google Apps Script나 다른 서버로 요청을 보낼 수 있습니다.
-            });
+            // GET 요청 보내기 (선택된 값 전달)
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', scriptUrl + '?selectedValue=' + encodeURIComponent(selectedValue), true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // 응답 처리
+                    alert('응답: ' + xhr.responseText);
+                } else {
+                    // 오류 처리
+                    alert('오류 발생');
+                }
+            };
+            xhr.send();
         });
-    </script>
-
-</body>
-</html>
+    });
+</script>
