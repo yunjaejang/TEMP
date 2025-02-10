@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>커스텀 라디오 버튼</title>
+    <title>라디오 버튼 동적 처리</title>
     <style>
-        /* 기본 라디오 버튼 숨기기 */
+        /* 기본적인 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* 라디오 버튼 숨기기 */
         input[type="radio"] {
             display: none;
         }
@@ -16,10 +22,9 @@
             align-items: center;
             cursor: pointer;
             font-size: 18px;
-            margin: 10px;
+            margin-right: 20px; /* 가로로 배치하기 위해 오른쪽 마진 추가 */
         }
 
-        /* 원형 스타일 */
         .custom-radio .circle {
             width: 20px;
             height: 20px;
@@ -32,12 +37,11 @@
             transition: all 0.3s;
         }
 
-        /* 체크 시 내부 점 표시 */
+        /* 라디오 버튼이 선택되면 배경색 변화 */
         input[type="radio"]:checked + .custom-radio .circle {
             background-color: #007bff;
         }
 
-        /* 내부 점 */
         .custom-radio .circle::after {
             content: "";
             width: 10px;
@@ -48,7 +52,7 @@
             transition: all 0.3s;
         }
 
-        /* 선택된 경우 내부 점 표시 */
+        /* 선택된 라디오 버튼 안에 점 표시 */
         input[type="radio"]:checked + .custom-radio .circle::after {
             opacity: 1;
         }
@@ -58,20 +62,28 @@
 
     <h2>커스텀 라디오 버튼</h2>
 
-    <input type="radio" id="radio1" name="custom-radio-group" value="1">
-    <label for="radio1" class="custom-radio">
-        <div class="circle"></div> 옵션 1
-    </label>
+    <div style="display: flex; justify-content: flex-start;"> <!-- 가로로 배치하는 부모 컨테이너 -->
+        <input type="radio" id="radio1" name="custom-radio-group" value="직영">
+        <label for="radio1" class="custom-radio">
+            <div class="circle"></div> 직영
+        </label>
 
-    <input type="radio" id="radio2" name="custom-radio-group" value="2">
-    <label for="radio2" class="custom-radio">
-        <div class="circle"></div> 옵션 2
-    </label>
+        <input type="radio" id="radio2" name="custom-radio-group" value="위탁">
+        <label for="radio2" class="custom-radio">
+            <div class="circle"></div> 위탁
+        </label>
+    </div>
 
-    <input type="radio" id="radio3" name="custom-radio-group" value="3">
-    <label for="radio3" class="custom-radio">
-        <div class="circle"></div> 옵션 3
-    </label>
+    <script>
+        // 라디오 버튼 클릭 시 동적 처리
+        document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+            radio.addEventListener('change', function(event) {
+                // 라디오 버튼 값에 따라 동적 처리
+                alert('선택된 값: ' + event.target.value);
+                // 여기에 Google Apps Script나 다른 서버로 요청을 보낼 수 있습니다.
+            });
+        });
+    </script>
 
 </body>
 </html>
