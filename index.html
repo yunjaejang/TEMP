@@ -14,20 +14,17 @@
       margin: 0;
       background-color: #f4f4f4;
     }
-
     .radio-container {
       display: flex;
       flex-direction: row; /* 가로로 배치 */
       gap: 20px; /* 버튼 간격을 설정 */
     }
-
     .radio-label {
       font-size: 18px;
       display: flex;
       align-items: center;
       cursor: pointer;
     }
-
     input[type="radio"] {
       margin-right: 10px;
       transform: scale(1.2);
@@ -43,5 +40,21 @@
       <input type="radio" name="option" value="위탁"> 위탁
     </label>
   </div>
+
+  <script>
+    // 라디오 버튼 클릭 시 동작하는 코드
+    document.querySelectorAll('input[name="option"]').forEach((radio) => {
+      radio.addEventListener('change', function() {
+        const selectedValue = this.value;
+        
+        // 선택된 값을 Looker Studio의 파라미터로 전달
+        window.parent.postMessage({ 
+          type: 'setParameter', 
+          parameter: 'SelectYearMonth', // Looker Studio 파라미터 이름
+          value: selectedValue // 라디오 버튼에서 선택된 값
+        }, '*');
+      });
+    });
+  </script>
 </body>
 </html>
