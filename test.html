@@ -1,58 +1,77 @@
-<form action="/dashboards/1" method="get">
-    <h2><center>My Parameterized Report</center></h2>
-    <input type="hidden" name="run" value="1" />
-    <div style="display:flex">
-      <div style="margin:0 1em">
-        <select type="text" id="myform-state" name="State">
-          <option value="AK">Alaska</option>
-          <option value="FL">Florida</option>
-          <option value="NY">New York</option>
-        </select>
-        <br /><label for="myform-state" style="color:#AAA;font-size:0.8em"> State</label><br />
-      </div>
-      <div style="margin:0 1em">
-        <input type="text" id="myform-city" name="City" /><br />
-        <label for="myform-city" style="color:#AAA;font-size:0.8em">City</label>
-      </div>
-      <div style="margin:0 1em">
-        <input type="date" id="myform-date" name="Date" /><br />
-        <label for="myform-date" style="color:#AAA;font-size:0.8em">Date</label>
-      </div>
-      <div style="margin:0 1em">
-       <input type="submit" value="Go" name="" style="height:2em" />
-      </div>
-    </div>
-    <details>
-      <summary>More Options</summary>
-      <table>
-    
-      <tr><td><label for="myform-opt0">Datetime: </label></td>
-      <td><input type="datetime-local" id="myform-opt0" name="My_Datetime" /></td></tr>
-      <tr><td><label for="myform-opt1">Month: </label></td>
-      <td><input type="month" id="myform-opt1" name="My_Month" /></td></tr>
-      <tr><td><label for="myform-opt2">Number: </label></td>
-      <td><input type="number" id="myform-opt2" name="My_Number" min="1" step="1" max="10" /></td></tr>
-      <tr><td><label for="myform-opt3">Range: </label></td>
-      <td><input type="range" id="myform-opt3" name="My_Range" /></td></tr>
-      <tr><td><label for="myform-opt4">Email: </label></td>
-      <td><input type="email" id="myform-opt4" name="My_Email" /></td></tr>
-      <tr><td><b>Pick one:</b></td>
-      <td>
-      <input type="radio" id="myform-mode-day" name="Mode" value="d" checked="checked" />
-      <label for="myform-mode-day" >Day</label> &nbsp;
-      <input type="radio" id="myform-mode-week" name="Mode" value="w" />
-      <label for="myform-mode-week">Week</label> &nbsp;
-      <input type="radio" id="myform-mode-month" name="Mode" value="m" />
-      <label for="myform-mode-month">Month</label>
-      </td></tr>
-      <tr><td><b>Pick any:</b></td>
-      <td>
-      <input type="checkbox" id="myform-check-a" name="Checks" value="web" checked="checked" />
-      <label for="myform-check-a" >Web</label> &nbsp;
-      <input type="checkbox" id="myform-check-b" name="Checks" value="android" checked="checked"  />
-      <label for="myform-check-week">Android</label> &nbsp;
-      <input type="checkbox" id="myform-check-c" name="Checks" value="ios" checked="checked"  />
-      <label for="myform-check-c">iOS</label>
-      </td></tr>
-    </details>
-    </form>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커스텀 라디오 버튼</title>
+    <style>
+        /* 기본 라디오 버튼 숨기기 */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* 라벨 스타일 */
+        .custom-radio {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px;
+        }
+
+        /* 원형 스타일 */
+        .custom-radio .circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        /* 체크 시 내부 점 표시 */
+        input[type="radio"]:checked + .custom-radio .circle {
+            background-color: #007bff;
+        }
+
+        /* 내부 점 */
+        .custom-radio .circle::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        /* 선택된 경우 내부 점 표시 */
+        input[type="radio"]:checked + .custom-radio .circle::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>커스텀 라디오 버튼</h2>
+
+    <input type="radio" id="radio1" name="custom-radio-group" value="1">
+    <label for="radio1" class="custom-radio">
+        <div class="circle"></div> 옵션 1
+    </label>
+
+    <input type="radio" id="radio2" name="custom-radio-group" value="2">
+    <label for="radio2" class="custom-radio">
+        <div class="circle"></div> 옵션 2
+    </label>
+
+    <input type="radio" id="radio3" name="custom-radio-group" value="3">
+    <label for="radio3" class="custom-radio">
+        <div class="circle"></div> 옵션 3
+    </label>
+
+</body>
+</html>
