@@ -1,27 +1,49 @@
-<script>
-    // 라디오 버튼 클릭 시 동적 처리
-    document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
-        radio.addEventListener('change', function(event) {
-            // 선택된 라디오 버튼 값 가져오기
-            var selectedValue = event.target.value;
-            alert('선택된 값: ' + selectedValue);
+<!-- HTML 부분 (예시로 라디오 버튼이 포함된 HTML) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button Example</title>
+</head>
+<body>
+    <h3>년-월 선택</h3>
+    <label>
+        <input type="radio" name="yearMonth" value="2024-01"> 2024-01
+    </label>
+    <label>
+        <input type="radio" name="yearMonth" value="2024-02"> 2024-02
+    </label>
+    <label>
+        <input type="radio" name="yearMonth" value="2024-03"> 2024-03
+    </label>
 
-            // Google Apps Script 웹 앱에 GET 요청 보내기
-            var scriptUrl = 'https://script.google.com/macros/s/AKfycbzCq9MqWUI37xfnChsAQ1M9t0iaBpsB6ETc7McmRoZudGzKL9cnLemt5TcX43yTy1HjRw/exec';  // 여기에 배포된 웹 앱 URL 입력
+    <script>
+        // 라디오 버튼 클릭 시 동적 처리
+        document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+            radio.addEventListener('change', function(event) {
+                // 선택된 라디오 버튼 값 가져오기
+                var selectedValue = event.target.value;
+                alert('선택된 값: ' + selectedValue);
 
-            // GET 요청 보내기 (선택된 값 전달)
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', scriptUrl + '?selectedValue=' + encodeURIComponent(selectedValue), true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // 응답 처리
-                    alert('응답: ' + xhr.responseText);
-                } else {
-                    // 오류 처리
-                    alert('오류 발생');
-                }
-            };
-            xhr.send();
+                // Google Apps Script 웹 앱에 GET 요청 보내기
+                var scriptUrl = 'https://script.google.com/macros/s/your-web-app-id/exec';  // 여기에 배포된 웹 앱 URL 입력
+
+                // GET 요청 보내기 (선택된 값 전달)
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', scriptUrl + '?selectedValue=' + encodeURIComponent(selectedValue), true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // 응답 처리
+                        alert('응답: ' + xhr.responseText);
+                    } else {
+                        // 오류 처리
+                        alert('오류 발생');
+                    }
+                };
+                xhr.send();
+            });
         });
-    });
-</script>
+    </script>
+</body>
+</html>
