@@ -1,8 +1,0 @@
-window.addEventListener('message', function(event) {
-  if (event.data.type === 'changeURL') {
-    const selectedValue = event.data.value;
-    // selectedValue를 기반으로 URL 변경
-    const newURL = `https://lookerstudio.com?filter=${selectedValue}`;
-    window.location.href = newURL;
-  }
-});
