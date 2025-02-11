@@ -16,8 +16,8 @@
     }
     .radio-container {
       display: flex;
-      flex-direction: row; /* 가로로 배치 */
-      gap: 20px; /* 버튼 간격을 설정 */
+      flex-direction: row;
+      gap: 20px;
     }
     .radio-label {
       font-size: 18px;
@@ -42,17 +42,19 @@
   </div>
 
   <script>
-    // 라디오 버튼 클릭 시 Looker Studio로 값 전달
+    // 라디오 버튼 클릭 시 URL 파라미터 수정
     document.querySelectorAll('input[name="option"]').forEach((radio) => {
       radio.addEventListener('change', function() {
         const selectedValue = this.value;
         
-        // Looker Studio Pro로 메시지 전달
-        window.parent.postMessage({ 
-          type: 'setParameter', 
-          parameter: 'filter_a', // Looker Studio의 필터 파라미터 (현재 사용 중인 필터 이름으로 변경)
-          value: selectedValue 
-        }, '*');
+        // 현재 URL 가져오기
+        const url = new URL(window.location.href);
+        
+        // URL 파라미터 설정 (Looker Studio 필터에 사용할 파라미터 추가)
+        url.searchParams.set('params', `{"ds7.FarmTypefilter": "${selectedValue}"}`);
+        
+        // 수정된 URL로 리다이렉트
+        window.location.href = url.toString();
       });
     });
   </script>
