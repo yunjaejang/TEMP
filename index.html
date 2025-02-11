@@ -29,11 +29,6 @@
       margin-right: 10px;
       transform: scale(1.2);
     }
-    iframe {
-      width: 100%;
-      height: 800px;
-      border: none;
-    }
   </style>
 </head>
 <body>
@@ -46,23 +41,21 @@
     </label>
   </div>
 
-  <!-- iFrame으로 Looker Studio 보고서 임베드 -->
-  <iframe id="lookerStudioFrame" src="https://lookerstudio.google.com/u/0/reporting/893faeda-10db-4852-9ece-45fad44197f0/page/p_2au8ndbjpd"></iframe>
-
   <script>
+    // 라디오 버튼 클릭 시 URL로 리다이렉트
     document.querySelectorAll('input[name="option"]').forEach((radio) => {
       radio.addEventListener('change', function() {
         const selectedValue = this.value;
+
+        // Looker Studio 보고서의 기본 URL
+        const baseUrl = "https://lookerstudio.google.com/u/0/reporting/893faeda-10db-4852-9ece-45fad44197f0/page/p_2au8ndbjpd";
         
-        // Looker Studio URL 설정
-        const lookerStudioUrl = "https://lookerstudio.google.com/u/0/reporting/893faeda-10db-4852-9ece-45fad44197f0/page/p_2au8ndbjpd";
-        
-        // URL 파라미터 추가
-        const newUrl = new URL(lookerStudioUrl);
+        // URL 파라미터 추가 (직영/위탁에 맞는 값)
+        const newUrl = new URL(baseUrl);
         newUrl.searchParams.set('params', `{"ds7.FarmTypefilter": "${selectedValue}"}`);
         
-        // iFrame의 src를 수정하여 필터 적용
-        document.getElementById('lookerStudioFrame').src = newUrl.toString();
+        // 변경된 URL로 리다이렉트
+        window.location.href = newUrl.toString();
       });
     });
   </script>
