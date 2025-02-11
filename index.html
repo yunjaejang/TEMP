@@ -1,69 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>라디오 버튼 예시</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f4f4f4;
-    }
-    .radio-container {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-    }
-    .radio-label {
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-    input[type="radio"] {
-      margin-right: 10px;
-      transform: scale(1.2);
-    }
-  </style>
+  <title>Radio Button Example</title>
 </head>
 <body>
-  <div class="radio-container">
-    <label class="radio-label">
-      <input type="radio" name="option" value="직영"> 직영
-    </label>
-    <label class="radio-label">
-      <input type="radio" name="option" value="위탁"> 위탁
-    </label>
-  </div>
+  <form>
+    <input type="radio" name="filter" value="direct"> Direct<br>
+    <input type="radio" name="filter" value="indirect"> Indirect<br>
+  </form>
 
   <script>
-    // 라디오 버튼 클릭 시 동작하는 코드
-    document.querySelectorAll('input[name="option"]').forEach((radio) => {
-      radio.addEventListener('change', function() {
+    // 라디오 버튼 클릭 시 부모 페이지로 메시지 전송
+    document.querySelectorAll('input[name="filter"]').forEach(button => {
+      button.addEventListener('change', function() {
         const selectedValue = this.value;
 
-        // App Script URL로 POST 요청 보내기
-        const url = "https://script.google.com/macros/s/AKfycbwyWB3BQBFoRdB04Gw0ekoF09-haOKPFjVLEUGLViRkN7fDo-FI4RrMG30H5gOaxhmDOQ/exec";
-        const data = {
-          parameter: 'ds7.FarmTypefilter',  // Looker Studio Pro의 필터 이름
-          value: selectedValue // 선택된 값
-        };
-
-        fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => console.log("Success:", data))
-        .catch(error => console.error("Error:", error));
+        // 부모 페이지에 메시지 보내기 (postMessage 사용)
+        window.parent.postMessage({ type: 'changeURL', value: selectedValue }, '*');
       });
     });
   </script>
