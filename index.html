@@ -47,18 +47,19 @@
       radio.addEventListener('change', function() {
         const selectedValue = this.value;
 
-        // Looker Studio URL 설정
-        const lookerStudioUrl = "https://lookerstudio.google.com/u/0/reporting/893faeda-10db-4852-9ece-45fad44197f0/page/p_2au8ndbjpd";
+        // Looker Studio 보고서의 기본 URL
+        const baseUrl = "https://lookerstudio.google.com/u/0/reporting/893faeda-10db-4852-9ece-45fad44197f0/page/p_2au8ndbjpd";
         
-        // URL 파라미터 추가
-        const newUrl = new URL(lookerStudioUrl);
+        // URL 파라미터 추가 (직영/위탁에 맞는 값)
+        const newUrl = new URL(baseUrl);
         newUrl.searchParams.set('params', `{"ds7.FarmTypefilter": "${selectedValue}"}`);
-
-        // 새 URL로 리다이렉트
+        
+        // 변경된 URL로 리다이렉트
         window.location.href = newUrl.toString();
       });
     });
   </script>
 </body>
 </html>
+
 
