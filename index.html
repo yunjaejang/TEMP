@@ -3,34 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>라디오 버튼 필터</title>
+    <title>하림 폰트</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .subtitle {
+            font-size: 14px;
+        }
+        .message {
+            font-size: 16px;
+            font-weight: lighter;
+        }
+    </style>
 </head>
 <body>
-    <label>
-        <input type="radio" name="farmtype" value="직영" onclick="sendSelection('직영')"> 직영
-    </label>
-    <label>
-        <input type="radio" name="farmtype" value="위탁" onclick="sendSelection('위탁')"> 위탁
-    </label>
-
-    <script>
-        // App Script 웹 앱 URL (배포 후 제공된 URL을 사용)
-        const appScriptUrl = "https://script.google.com/macros/s/AKfycbx_oDK8w4FSYR_9iofEz_3F-BkauqCx3H-G-pFWnh6ViMesR4Lj1adWAZNpNoqW1jSGgg/exec";
-
-        function sendSelection(selectedValue) {
-            // Looker Studio Pro (부모 페이지)로 데이터 전송
-            window.parent.postMessage({ type: "filter", value: selectedValue }, "*");
-
-            // App Script로 HTTP GET 요청 보내기
-            fetch(appScriptUrl + "?parameterName=" + encodeURIComponent(selectedValue))
-                .then(response => response.text())
-                .then(data => {
-                    console.log("App Script 응답:", data);
-                })
-                .catch(error => {
-                    console.error("App Script 요청 오류:", error);
-                });
-        }
-    </script>
+    <div class="title">대제목: 20px</div>
+    <div class="subtitle">중제목: 14px</div>
+    <div class="message">장표 메시지: 12px</div>
 </body>
 </html>
