@@ -47,12 +47,23 @@
       radio.addEventListener('change', function() {
         const selectedValue = this.value;
 
-        // 부모 페이지로 메시지를 전송 (Looker Studio Pro의 iFrame으로)
-        window.parent.postMessage({ 
-          type: 'setFilter', 
+        // App Script URL로 POST 요청 보내기
+        const url = "https://script.google.com/macros/s/AKfycbwqp4OkUgkk57CXDmS9JXEYg6BczV3GaOGsomtPrCBD7Ux6UYAsVOB3jzN_B9IrrjNSeg/exec";
+        const data = {
           parameter: 'ds7.FarmTypefilter',  // Looker Studio Pro의 필터 이름
           value: selectedValue // 선택된 값
-        }, '*');
+        };
+
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => console.log("Success:", data))
+        .catch(error => console.error("Error:", error));
       });
     });
   </script>
