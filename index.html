@@ -1,27 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radio Button Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>라디오 버튼 필터</title>
 </head>
 <body>
-  <form>
-    <input type="radio" name="filter" value="direct"> Direct<br>
-    <input type="radio" name="filter" value="indirect"> Indirect<br>
-  </form>
+    <label>
+        <input type="radio" name="farmtype" value="직영" onclick="sendSelection('직영')"> 직영
+    </label>
+    <label>
+        <input type="radio" name="farmtype" value="위탁" onclick="sendSelection('위탁')"> 위탁
+    </label>
 
-  <script>
-    // 라디오 버튼 클릭 시 부모 페이지로 메시지 전송
-    document.querySelectorAll('input[name="filter"]').forEach(button => {
-      button.addEventListener('change', function() {
-        const selectedValue = this.value;
-
-        // 부모 페이지에 메시지 보내기 (postMessage 사용)
-        window.parent.postMessage({ type: 'changeURL', value: selectedValue }, '*');
-      });
-    });
-  </script>
+    <script>
+        function sendSelection(selectedValue) {
+            // Looker Studio Pro (부모 페이지)로 데이터 전송
+            window.parent.postMessage({ type: "filter", value: selectedValue }, "*");
+        }
+    </script>
 </body>
 </html>
-
