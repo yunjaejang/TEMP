@@ -14,9 +14,22 @@
     </label>
 
     <script>
+        // App Script 웹 앱 URL (배포 후 제공된 URL을 사용)
+        const appScriptUrl = "https://script.google.com/macros/s/AKfycbx_oDK8w4FSYR_9iofEz_3F-BkauqCx3H-G-pFWnh6ViMesR4Lj1adWAZNpNoqW1jSGgg/exec";
+
         function sendSelection(selectedValue) {
             // Looker Studio Pro (부모 페이지)로 데이터 전송
             window.parent.postMessage({ type: "filter", value: selectedValue }, "*");
+
+            // App Script로 HTTP GET 요청 보내기
+            fetch(appScriptUrl + "?parameterName=" + encodeURIComponent(selectedValue))
+                .then(response => response.text())
+                .then(data => {
+                    console.log("App Script 응답:", data);
+                })
+                .catch(error => {
+                    console.error("App Script 요청 오류:", error);
+                });
         }
     </script>
 </body>
