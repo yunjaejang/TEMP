@@ -1,2 +1,12 @@
-<button onclick="window.location.href='https://your-report-url?metric=매출'">매출</button>
-<button onclick="window.location.href='https://your-report-url?metric=매출수수'">매출수수</button>
+<script>
+function updateMetric(value) {
+  fetch("https://script.google.com/macros/s/AKfycbzYMSiGwmN9UMI5zcB0Mfe-HhsyF-daf3_kCHt34xcpBwJk3MPFlKuZLRkIumlLPYT3jw/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: "metric=" + encodeURIComponent(value)
+  }).then(res => res.text()).then(alert);
+}
+</script>
+
+<button onclick="updateMetric('매출')">매출</button>
+<button onclick="updateMetric('매출수수')">매출수수</button>
